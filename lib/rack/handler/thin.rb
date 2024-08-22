@@ -8,7 +8,8 @@ require "thin/backends/tcp_server"
 module Rack
   module Handler
     class Thin
-      def self.run(app, **options)
+      def self.run(app, options = {}, **kwargs)
+        options.merge!(kwargs)
         environment  = ENV['RACK_ENV'] || 'development'
         default_host = environment == 'development' ? 'localhost' : '0.0.0.0'
 
